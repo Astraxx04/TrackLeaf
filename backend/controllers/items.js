@@ -1,21 +1,50 @@
-
+const Items = require("../models/items");
+const { BadRequestError, NotFoundError } = require("../errors");
 
 const getAllItems = async(req, res) => {
-    const tasks = await Task.find({});
-    res.status(200).json({ tasks });
+    const items = await Items.find({});
+    res.status(200).json({ items });
+};
+
+const getItem = async(req, res) => {
+    const { id: itemID } = req.params;
+    const item = await Items.findOne({ _id: itemID });
+    if(!item) {
+        throw new NotFoundError(`No item with id: ${itemID}`);
+    }
+    res.status(200).json({ item });      
 };
 
 const insertNewItem = async(req, res) => {
-    const task = await Task.create(req.body);
-    res.status(201).json({ task });
+    const item = await Items.create(req.body);
+    res.status(201).json({ item });
 };
 
-const updatetItem = async(req, res) => {
-    const task = await Task.create(req.body);
-    res.status(201).json({ task });
+const updateItem = async(req, res) => {
+    const { id: itemID } = req.params;
+    const item = await Items.findOneAndUpdate({ _id: itemID }, req.body, {
+        new: true,
+        runValidators: true
+    });
+    if(!item) {
+        throw new NotFoundError(`No item with id: ${itemID}`);
+    }
+    res.status(200).json({ item }); 
 };
 
-const deletetItem = async(req, res) => {
-    const task = await Task.create(req.body);
-    res.status(201).json({ task });
+const deleteItem = async(req, res) => {
+    const {id: itemID} = req.params;
+    const item = await Items.findOneAndDelete({ _id: itemID });
+    if(!item) {
+        throw new NotFoundError(`No item with id: ${itemID}`);
+    }
+    res.status(200).json({ item });
+};
+
+module.exports = {
+    getAllItems,
+    getItem,
+    insertNewItem,
+    updateItem,
+    deleteItem
 };
