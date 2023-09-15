@@ -46,7 +46,6 @@ const QRGenerator = ({ hexImages }) => {
   const handleGenerate = (e) => {
     e.preventDefault();
     console.log(number);
-
   };
 
   const hexToDataURL = (hex) => {
@@ -61,7 +60,7 @@ const QRGenerator = ({ hexImages }) => {
       </div>
       <div className= "bg-white flex flex-justify rounded-lg py-6 px-4  ">
         <input className='w-3/4 rounded-md focus:border-primary border-0 py-2 px-2 hover:border-2 hover:border-primary' onChange = { (e) =>  setNumber(e.target.value)} type='text' id='noQrCodes' placeholder='Enter the number of QR Codes to be generated' />
-        <button className='px-4 ml-4 py-2 text-white bg-primary rounded-md text-xl' onClick={handleGenerate}>Generate</button>
+        <button className='px-4 ml-4 py-2 text-white bg-primary rounded-md text-sm md:text-xl' onClick={handleGenerate}>Generate</button>
       </div>
       {/* <div className='bg-white rounded-lg py-6 px-4'>
         <div className='flex flex-wrap gap-4'>
