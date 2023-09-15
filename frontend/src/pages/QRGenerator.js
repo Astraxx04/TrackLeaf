@@ -1,7 +1,8 @@
 import React from "react";
 
 const QRGenerator = () => {
-  return <div>QRGenerator</div>;
+  console.log("hi");
+  return <div className="text-9xl">QRGenerator</div>;
 };
 
 export default QRGenerator;
