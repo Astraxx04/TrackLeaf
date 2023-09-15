@@ -74,7 +74,7 @@ const QRGenerator = ({ hexImages }) => {
           Generate
         </button>
       </div>
-      {data && (
+      {data.length > 0 && (
         <div className="bg-white rounded-lg py-6 px-4">
           <div className="flex flex-wrap gap-4">
             {data.map((hex, index) => (

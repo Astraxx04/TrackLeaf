@@ -26,7 +26,7 @@ const Table = ({ data }) => {
               <td className="px-4 py-2 text-sm">{item.category}</td>
               <td className="px-4 py-2 text-sm">{item.location}</td>
               <td className="px-4 py-2 text-sm">{item.userId}</td>
-              <td className="px-4 py-2 text-sm">{item.expiry}</td>
+              <td className="px-4 py-2 text-sm">{item.userId}</td>
               <td className="px-4 py-2 text-sm">{item.description}</td>
             </tr>
           ))}
