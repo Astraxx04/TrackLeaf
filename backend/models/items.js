@@ -19,12 +19,24 @@ const ItemsSchema = new mongoose.Schema({
   },
   qrId: {
     type: String,
-    required: [true, "Please provide qrId"]
+    required: [true, "Please provide qrId"],
+    unique: true
   },
   userId: {
     type: String,
-    required: [true, "Please provide userId"],
-    unique: true
+    required: [true, "Please provide userId"]
+  },
+  expiry: {
+    type: Date,
+    required: [true, "A task must have a date."],
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  },
+  status: {
+    type: String,
+    enum: ["given", "received", "null"]
   }
 });
 

@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import {useNavigate} from "react-router-dom"
 
 const Login = () => {
+   
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const navigate = useNavigate(); // Initialize the navigate function
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -14,10 +20,26 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add your login logic here
-        console.log('Username:', username);
-        console.log('Password:', password);
+
+        const userData = {
+            username: username,
+            password: password,
+        };
+
+        axios
+            .post("http://localhost:5000/api/v1/login", userData)
+            .then((res) => {
+                if (res.data.success) {
+                    navigate('/dashboard'); 
+                } else {
+                    setErrorMessage('Wrong username or password');
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     };
+    
 
     return (
         <div className="h-screen bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center">
