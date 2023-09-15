@@ -1,7 +1,10 @@
 import React from "react";
 import { Table } from "../components";
+import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const ManageInventory = () => {
+  const navigate = useNavigate();
   const data = [
     {
       itemName: "Item 1",
@@ -49,7 +52,10 @@ const ManageInventory = () => {
       </div>
       <div className="rounded-lg bg-white py-6 px-4 ">
         <div className="flex flex-wrap justify-evenly">
-          <button className="px-24 py-8 bg-green-100 rounded-md font-semibold">
+          <button
+            onClick={() => navigate("/item/add")}
+            className="px-24 py-8 bg-green-100 rounded-md font-semibold"
+          >
             Add Item
           </button>
           <button className="px-24 py-8 bg-yellow-100 rounded-md font-semibold">
