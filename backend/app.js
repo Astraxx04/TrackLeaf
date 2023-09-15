@@ -5,10 +5,12 @@ require("express-async-errors");
 const connectDB = require("./database/connect");
 const itemRouter = require("./routes/items");
 const loginRouter = require("./routes/login");
+const cors = require("cors");
 
 const notFoundMiddleware = require("./middlewares/not-found");
 const errorHandlerMiddleware = require("./middlewares/error-handler");
 
+app.use(cors());
 app.use(express.json());
 app.use("/api/v1/", itemRouter);
 

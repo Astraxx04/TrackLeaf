@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { QrReader } from "react-qr-reader";
+import axios from "axios";
 
 const AddItem = () => {
   const [qrData, setQrData] = useState("");
@@ -9,7 +10,7 @@ const AddItem = () => {
     category: "",
     location: "",
     qrId: "",
-    incharge: "",
+    userId: "",
   });
 
   const handleResult = (result) => {
@@ -30,6 +31,14 @@ const AddItem = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    axios
+      .post("http://localhost:5000/api/v1/insert", item)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     console.log(item);
   };
@@ -95,9 +104,9 @@ const AddItem = () => {
           Incharge:
           <input
             type="text"
-            id="incharge"
+            id="userId"
             placeholder="Enter incharge"
-            name="incharge"
+            name="userId"
             onChange={handleChange}
           />
         </label>
