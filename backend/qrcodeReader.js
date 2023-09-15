@@ -27,7 +27,7 @@ async function generateQRCodeImagesWithUniqueIDs(count) {
   return qrCodeImages;
 }
 
-const numberOfQRcodes = 3; // Change this to the number of QR codes you want to generate
+const numberOfQRcodes = 3;
 generateQRCodeImagesWithUniqueIDs(numberOfQRcodes)
   .then((qrCodeImages) => {
     // qrCodeImages is an array of base64-encoded QR code images with unique IDs
@@ -37,5 +37,5 @@ generateQRCodeImagesWithUniqueIDs(numberOfQRcodes)
     });
   })
   .catch((error) => {
-    console.error('Error generating QR codes:', error);
+    console.error('Error generating QR codes:', error);
 });

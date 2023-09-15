@@ -21,6 +21,10 @@ const ItemsSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide qrId"]
   },
+  userId: {
+    type: String,
+    required: [true, "Please provide userId"]
+  }
 });
 
 module.exports = mongoose.model("Items", ItemsSchema);
