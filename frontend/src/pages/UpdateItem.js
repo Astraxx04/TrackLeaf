@@ -20,14 +20,14 @@ const UpdateItem = ({ itemId }) => {
         .get(`http://localhost:5000/api/v1/${qrData}`)
         .then((res) => {
           const itemData = res.data; // Assuming the API response contains item data
-          setItem(itemData);
-          console.log(res.data.item);
+          setItem(itemData.item);
         })
         .catch((err) => {
           console.log(err);
         });
     }
   }, [qrData]);
+  console.log(item.description);
 
   const handleResult = (result) => {
     if (result) {
@@ -89,7 +89,7 @@ const UpdateItem = ({ itemId }) => {
             type="text"
             id="description"
             name="description"
-            value={item.description || ""}
+            value={item.description}
             onChange={handleChange}
           />
         </label>
