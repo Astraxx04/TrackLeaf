@@ -58,7 +58,10 @@ const ManageInventory = () => {
           >
             Add Item
           </button>
-          <button className="px-24 py-8 bg-yellow-100 rounded-md font-semibold">
+          <button
+            onClick={() => navigate("/item/update")}
+            className="px-24 py-8 bg-yellow-100 rounded-md font-semibold"
+          >
             Update Item
           </button>{" "}
           <button className="px-24 py-8 bg-red-100 rounded-md font-semibold">

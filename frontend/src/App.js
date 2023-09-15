@@ -8,6 +8,7 @@ import {
   Track,
   ManageInventory,
   AddItem,
+  UpdateItem,
 } from "./pages";
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/item/add" element={<AddItem />} />
+            <Route path="/item/update" element={<UpdateItem />} />
           </Routes>
         </Router>
       </div>
