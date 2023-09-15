@@ -23,7 +23,8 @@ const ItemsSchema = new mongoose.Schema({
   },
   userId: {
     type: String,
-    required: [true, "Please provide userId"]
+    required: [true, "Please provide userId"],
+    unique: true
   }
 });
 
