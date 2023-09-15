@@ -16,7 +16,7 @@ const getAllItems = async (req, res) => {
 
 const getItem = async (req, res) => {
   const { id: itemID } = req.params;
-  const item = await Items.findOne({ _id: itemID });
+  const item = await Items.findOne({ qrId: itemID });
   if (!item) {
     throw new NotFoundError(`No item with id: ${itemID}`);
   }
@@ -31,7 +31,7 @@ const insertNewItem = async (req, res) => {
 
 const updateItem = async (req, res) => {
   const { id: itemID } = req.params;
-  const item = await Items.findOneAndUpdate({ _id: itemID }, req.body, {
+  const item = await Items.findOneAndUpdate({ qrId: itemID }, req.body, {
     new: true,
     runValidators: true,
   });
@@ -43,7 +43,7 @@ const updateItem = async (req, res) => {
 
 const deleteItem = async (req, res) => {
   const { id: itemID } = req.params;
-  const item = await Items.findOneAndDelete({ _id: itemID });
+  const item = await Items.findOneAndDelete({ qrId: itemID });
   if (!item) {
     throw new NotFoundError(`No item with id: ${itemID}`);
   }
