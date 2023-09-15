@@ -14,20 +14,19 @@ const UpdateItem = ({ itemId }) => {
   });
 
   useEffect(() => {
-    // Fetch the item data using itemId (assuming you have an API endpoint for this)
     if (qrData) {
       axios
         .get(`http://localhost:5000/api/v1/${qrData}`)
         .then((res) => {
           const itemData = res.data; // Assuming the API response contains item data
-          setItem(itemData.item);
+          setItem(res.data.item);
         })
+        .then(console.log(item))
         .catch((err) => {
           console.log(err);
         });
     }
   }, [qrData]);
-  console.log(item.description);
 
   const handleResult = (result) => {
     if (result) {

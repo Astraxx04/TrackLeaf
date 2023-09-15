@@ -56,7 +56,7 @@ const DeleteItem = () => {
         style={{ width: "100%" }}
       />
       <p>{qrData ? qrData : "Scan properly"}</p>
-      {item && (
+      {item ? (
         <div>
           <p>Item Details:</p>
           <p>Name: {item.name}</p>
@@ -66,6 +66,8 @@ const DeleteItem = () => {
           <p>Incharge: {item.userId}</p>
           <button onClick={handleDelete}>Delete</button>
         </div>
+      ) : (
+        <p>{qrData ? "No such item to delete" : ""}</p>
       )}
     </div>
   );

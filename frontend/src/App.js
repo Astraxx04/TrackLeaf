@@ -5,12 +5,13 @@ import {
   Home,
   Landing,
   QRGenerator,
-  Track,
+  TrackDashboard,
   ManageInventory,
   Login,
   AddItem,
   UpdateItem,
   DeleteItem,
+  Tracker,
 } from "./pages";
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
             <Route path="/dashboard/Login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />}>
               <Route path="/dashboard/QRGenerator" element={<QRGenerator />} />
-              <Route path="/dashboard/Track" element={<Track />} />
+              <Route path="/dashboard/Track" element={<TrackDashboard />} />
               <Route path="/dashboard/Home" element={<Home />} />
               <Route
                 path="/dashboard/ManageInventory"
@@ -35,6 +36,9 @@ function App() {
             <Route path="/item/add" element={<AddItem />} />
             <Route path="/item/update" element={<UpdateItem />} />
             <Route path="/item/delete" element={<DeleteItem />} />
+          </Routes>
+          <Routes>
+            <Route path="/tracker" element={<Tracker />} />
           </Routes>
         </Router>
       </div>
