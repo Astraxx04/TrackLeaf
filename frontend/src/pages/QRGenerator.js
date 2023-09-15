@@ -47,18 +47,21 @@ const QRGenerator = ({ hexImages }) => {
 
   return (
 
-    <div className='flex flex-wrap gap-4'>
-      {hexImages.map((hex, index) => (
-        <img
-          className='h-32 w-32 object-cover'
-          src={hexToDataURL(hex)}
-          alt={`Image ${index}`}
-        />
-      ))}
-      <div className='flex'>
-        <button className='bg-green-400 border-solid border-2 border-black rounded-lg' onClick={handlePrintClick}>Print</button>
+    <div className='bg-white rounded-lg py-6 px-4'>
+      <div className='flex flex-wrap gap-4'>
+        {hexImages.map((hex, index) => (
+          <img
+            className='h-32 w-32 object-cover'
+            src={hexToDataURL(hex)}
+            alt={`Image ${index}`}
+          />
+        ))}
+      </div>
+      <div className='text-lg text-white'> 
+        <button className='px-16 py-4 bg-primary rounded-md font-semibold' onClick={handlePrintClick}>Print</button>
       </div>
     </div>
+
   );
 };
 
