@@ -45,7 +45,7 @@ const deleteItem = async (req, res) => {
   const { id: itemID } = req.params;
   const item = await Items.findOneAndDelete({ qrId: itemID });
   if (!item) {
-    res.status(200).json(`No element with id ${itemID}`);
+    throw new NotFoundError(`No item with id: ${itemID}`);
   }
   res.status(200).json({ item });
 };
