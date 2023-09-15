@@ -10,6 +10,7 @@ import {
   Login,
   AddItem,
   UpdateItem,
+  Register,
   DeleteItem,
   Tracker,
 } from "./pages";
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/dashboard/Login" element={<Login />} />
+            <Route path="/dashboard/Register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />}>
               <Route path="/dashboard/QRGenerator" element={<QRGenerator />} />
               <Route path="/dashboard/Track" element={<TrackDashboard />} />
