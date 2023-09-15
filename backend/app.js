@@ -3,10 +3,21 @@ const app = express();
 require("dotenv").config();
 require("express-async-errors");
 const connectDB = require("./database/connect");
+const itemRouter = require("./routes/items");
+const loginRouter = require("./routes/login");
+
+const notFoundMiddleware = require("./middlewares/not-found");
+const errorHandlerMiddleware = require("./middlewares/error-handler");
 
 app.use(express.json());
+app.use("/api/v1/", itemRouter);
 
-const port = process.env.PORT || 5000;
+app.use("/api/v1/", loginRouter);
+
+// app.use(notFoundMiddleware);
+// app.use(errorHandlerMiddleware);
+
+const port = process.env.PORT || 3000;
 
 const startServer = async () => {
   try {
