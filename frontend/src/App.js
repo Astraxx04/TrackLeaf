@@ -13,6 +13,7 @@ import {
   Register,
   DeleteItem,
   Tracker,
+  Chart,
 } from "./pages";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
               <Route path="/dashboard/QRGenerator" element={<QRGenerator />} />
               <Route path="/dashboard/Track" element={<TrackDashboard />} />
               <Route path="/dashboard/Home" element={<Home />} />
+              <Route path="/dashboard/Chart" element={<Chart />} />
               <Route
                 path="/dashboard/ManageInventory"
                 element={<ManageInventory />}

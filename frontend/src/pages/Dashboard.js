@@ -4,6 +4,15 @@ import { Outlet } from "react-router-dom";
 import { IoIosNotificationsOutline } from "react-icons/io";
 
 const Dashboard = () => {
+
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://').then((response) => {
+      setItems(response.data); 
+    });
+  }, []);
+
   return (
     <div className="flex">
       <Sidebar />
