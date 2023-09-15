@@ -4,7 +4,7 @@ import axios from "axios";
 
 const Tracker = () => {
   const [qrData, setQrData] = useState("");
-  const [qrArray, setQrArray] = useState([]);
+  const [qrDataArray, setQrDataArray] = useState([]); // Use state to store QR code data
   const [item, setItem] = useState({
     name: "",
     description: "",
@@ -22,45 +22,51 @@ const Tracker = () => {
         .then((res) => {
           setItem(res.data.item);
         })
-        .then(console.log(item))
         .catch((err) => {
           console.log(err);
         });
     }
   }, [qrData]);
+
   const handleResult = (result) => {
     if (result) {
       console.log(result.text);
       setQrData(result.text);
-      setQrArray([...qrArray, result.text]);
+      setQrDataArray((prevArray) => [...prevArray, result.text]); // Update the state array
     }
   };
 
-  const handleChange = (e) => {
-    setItem({ ...item, [e.target.name]: e.target.value });
-  };
-  const handleSubmit = () => {
-    for (const x in qrArray) {
-      e.preventDefault();
-      axios
-        .patch(`http://localhost:5000/api/v1/update/${x}`, {
-          userId,
-          status: "given",
-        }) // Assuming you have an API endpoint for updating items
-        .then((res) => {
-          setItem({
-            name: "",
-            description: "",
-            category: "",
-            location: "",
-            qrId: "",
-            userId: "",
-          });
-        })
-        .catch((err) => {
-          console.log(err);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(qrDataArray);
+    const newStatus = qrCode.status === "given" ? "received" : "given";
+    // Use Promise.all to wait for all API requests to complete
+    const updatePromises = qrDataArray.map((qrCode, index) => {
+      return axios.patch(`http://localhost:5000/api/v1/update/${qrCode}`, {
+        userId,
+        status: newStatus,
+      });
+    });
+
+    Promise.all(updatePromises)
+      .then((responses) => {
+        setItem({
+          name: "",
+          description: "",
+          category: "",
+          location: "",
+          qrId: "",
+          userId: "",
+          expiry: "",
         });
-    }
+        console.log(responses);
+        // Clear the QR code data after processing
+        setQrData("");
+        setQrDataArray([]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleError = (error) => {

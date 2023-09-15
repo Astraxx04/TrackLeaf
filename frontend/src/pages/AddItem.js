@@ -1,9 +1,22 @@
 import React, { useState } from "react";
 import { QrReader } from "react-qr-reader";
 import axios from "axios";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 const AddItem = () => {
   const [qrData, setQrData] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    formatDate();
+  };
+  const formatDate = () => {
+    const formattedDate = moment(selectedDate).toDate();
+    setItem({ ...item, expiry: formattedDate });
+  };
+
   const [item, setItem] = useState({
     name: "",
     description: "",
@@ -11,6 +24,7 @@ const AddItem = () => {
     location: "",
     qrId: "",
     userId: "",
+    expiry: "",
   });
 
   const handleResult = (result) => {
@@ -30,6 +44,8 @@ const AddItem = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log(item);
     axios
       .post("http://localhost:5000/api/v1/insert", item)
       .then((res) => {
@@ -51,7 +67,9 @@ const AddItem = () => {
         style={{ width: "100%" }}
       />
 
-      <p className="text-center mt-4 text-2xl color-primary">{qrData ? qrData : "Scan properly"}</p>
+      <p className="text-center mt-4 text-2xl color-primary">
+        {qrData ? qrData : "Scan properly"}
+      </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex items-center">
@@ -69,7 +87,10 @@ const AddItem = () => {
         </div>
 
         <div className="flex items-center">
-          <label htmlFor="description" className="block text-sm font-medium w-1/4">
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium w-1/4"
+          >
             Description:
           </label>
           <input
@@ -121,6 +142,16 @@ const AddItem = () => {
             name="userId"
             onChange={handleChange}
             className="mt-1 p-2 border rounded-lg flex-grow"
+          />
+        </div>
+        <div className="flex items-center">
+          <label htmlFor="expiry" className="block text-sm font-medium w-1/4">
+            Expiry Date:
+          </label>
+          <DatePicker
+            selected={selectedDate}
+            onChange={handleDateChange}
+            dateFormat="dd/MM/yyyy" // You can customize the date format as needed
           />
         </div>
 
