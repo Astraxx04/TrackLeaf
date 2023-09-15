@@ -5,6 +5,7 @@ require("express-async-errors");
 const connectDB = require("./database/connect");
 const itemRouter = require("./routes/items");
 const loginRouter = require("./routes/login");
+const qrRouter = require("./routes/qrCodes");
 const cors = require("cors");
 
 const notFoundMiddleware = require("./middlewares/not-found");
@@ -15,6 +16,8 @@ app.use(express.json());
 app.use("/api/v1/", itemRouter);
 
 app.use("/api/v1/", loginRouter);
+
+app.use("/api/v1/", qrRouter);
 
 // app.use(notFoundMiddleware);
 // app.use(errorHandlerMiddleware);
