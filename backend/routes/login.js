@@ -6,7 +6,10 @@ const express = require('express');
 
 const router = express.Router();
 
+// router.route("/login").post(login);
+// router.route("/register").post(authMiddleware, checkRoleMiddleware("admin"), register);
+
 router.route("/login").post(login);
-router.route("/register").post(authMiddleware, checkRoleMiddleware("admin"), register);
+router.route("/register").post(register);
 
 module.exports = router;

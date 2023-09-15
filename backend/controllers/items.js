@@ -1,5 +1,5 @@
 const Items = require("../models/items");
-const { BadRequestError, NotFoundError } = require("../errors");
+const { NotFoundError } = require("../errors");
 
 const getAllItems = async(req, res) => {
     const { category } = req.query;
@@ -24,6 +24,7 @@ const getItem = async(req, res) => {
 };
 
 const insertNewItem = async(req, res) => {
+    req.body.userId = req.user.id;
     const item = await Items.create(req.body);
     res.status(201).json({ item });
 };

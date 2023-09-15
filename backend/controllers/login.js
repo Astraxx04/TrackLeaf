@@ -41,7 +41,12 @@ const login = async(req, res) => {
     res.status(200).json({ token, user });
 };
 
+const logout = async(req, res) => {
+    res.status(200).json({ message: 'Logout successful' });
+};
+
 module.exports = {
     register,
-    login
+    login,
+    logout
 };
