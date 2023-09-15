@@ -3,29 +3,42 @@ const mongoose = require("mongoose");
 const ItemsSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Please provide name"]
+    required: [true, "Please provide name"],
   },
   description: {
     type: String,
-    required: [true, "Please provide description"]
+    required: [true, "Please provide description"],
   },
   location: {
     type: String,
-    required: [true, "Please provide location"]
+    required: [true, "Please provide location"],
   },
   category: {
     type: String,
-    required: [true, "Please provide category"]
+    required: [true, "Please provide category"],
   },
   qrId: {
     type: String,
-    required: [true, "Please provide qrId"]
+    required: [true, "Please provide qrId"],
+    unique: true,
   },
   userId: {
     type: String,
     required: [true, "Please provide userId"],
-    unique: true
-  }
+  },
+  expiry: {
+    type: Date,
+    required: [true, "A task must have a date."],
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
+  status: {
+    type: String,
+    enum: ["given", "received", "null"],
+    default: "null",
+  },
 });
 
 module.exports = mongoose.model("Items", ItemsSchema);

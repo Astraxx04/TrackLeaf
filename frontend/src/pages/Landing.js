@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import landing from "../assets/landing.png";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -38,7 +39,7 @@ const Landing = () => {
     left: isSidebarOpen ? "0" : "-100%",
     width: "80%",
     height: "100%",
-    backgroundColor: "#0074e4", // Use the actual primary color here
+    backgroundColor: "#0074e4",
     zIndex: "1000",
     transition: "left 0.3s ease-in-out",
     overflowY: "auto",
@@ -66,7 +67,7 @@ const Landing = () => {
         <img src={logo} alt="Image" className="h-10 w-25 mx-auto" />
         <ul className="mt-6 space-y-4 text-2xl">
           {/* Sidebar content */}
-          <li>
+          {/* <li>
             <a href="/home" style={navbarTextStyle}>
               Home
             </a>
@@ -80,14 +81,14 @@ const Landing = () => {
             <a href="/control" style={navbarTextStyle}>
               Control
             </a>
-          </li>
+          </li> */}
           <li>
-            <a href="/login" style={navbarTextStyle}>
+            <a href="/dashboard/Login" style={navbarTextStyle}>
               Login
             </a>
           </li>
           <li>
-            <a href="/get-started" style={navbarTextStyle}>
+            <a href="/dashboard/Register" style={navbarTextStyle}>
               Get Started
             </a>
           </li>
@@ -98,38 +99,40 @@ const Landing = () => {
         {!isSidebarOpen && (
           <>
             <div className="flex items-center">
-              <img src={logo} alt="Image" className="h-10 w-25" />
+              <Link to="/">
+                <img src={logo} alt="Image" className="h-10 w-25" />
+              </Link>
             </div>
-            <div className="hidden md:block">
+            { /*<div className="hidden md:block">
               <ul className="space-x-10 text-2xl flex flex-justify items-center">
                 <li className="p-15">
-                  <a href="/home" style={navbarTextStyle}>
+                  <Link to="/home" style={navbarTextStyle}>
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li className="p-15">
-                  <a href="/pricing" style={navbarTextStyle}>
+                  <Link to="/pricing" style={navbarTextStyle}>
                     Pricing
-                  </a>
+                  </Link>
                 </li>
                 <li className="p-15">
-                  <a href="/control" style={navbarTextStyle}>
+                  <Link to="/control" style={navbarTextStyle}>
                     Control
-                  </a>
+                  </Link>
                 </li>
               </ul>
-            </div>
+            </div> */}
             <div className="hidden md:block">
               <ul className="flex space-x-6">
                 <li>
-                  <a href="/login" style={navbarTextStyle}>
+                  <Link to="/dashboard/Login" style={navbarTextStyle}>
                     Login
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/get-started" style={navbarTextStyle}>
+                  <Link to="/dashboard/Register" style={navbarTextStyle}>
                     Get Started
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -142,7 +145,6 @@ const Landing = () => {
           &#x2630;
         </button>
       </nav>
-
       <div>
         <h1 style={taglineStyle}>"Redefining Inventory, One Scan at a Time"</h1>
         <h4 style={tagline}>Revolutionizing inventory management through scanning technology</h4>
