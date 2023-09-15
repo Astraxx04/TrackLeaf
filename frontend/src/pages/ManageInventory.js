@@ -1,50 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "../components";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import axios from "axios";
 
 const ManageInventory = () => {
   const navigate = useNavigate();
-  const data = [
-    {
-      itemName: "Item 1",
-      categoryName: "Category A",
-      location: "Location 1",
-      incharge: "John Doe",
-      description: "Description for Item 1",
-    },
-    {
-      itemName: "Item 1",
-      categoryName: "Category A",
-      location: "Location 1",
-      incharge: "John Doe",
-      description: "Description for Item 1",
-    },
-    {
-      itemName: "Item 1",
-      categoryName: "Category A",
-      location: "Location 1",
-      incharge: "John Doe",
-      description: "Description for Item 1",
-    },
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/v1/")
+      .then((res) => console.log(res.data.items));
+  }, []);
+  // const data = [
+  //   {
+  //     itemName: "Item 1",
+  //     categoryName: "Category A",
+  //     location: "Location 1",
+  //     incharge: "John Doe",
+  //     description: "Description for Item 1",
+  //   },
+  //   {
+  //     itemName: "Item 1",
+  //     categoryName: "Category A",
+  //     location: "Location 1",
+  //     incharge: "John Doe",
+  //     description: "Description for Item 1",
+  //   },
+  //   {
+  //     itemName: "Item 1",
+  //     categoryName: "Category A",
+  //     location: "Location 1",
+  //     incharge: "John Doe",
+  //     description: "Description for Item 1",
+  //   },
 
-    {
-      itemName: "Item 1",
-      categoryName: "Category A",
-      location: "Location 1",
-      incharge: "John Doe",
-      description: "Description for Item 1",
-    },
-    {
-      itemName: "Item 1",
-      categoryName: "Category A",
-      location: "Location 1",
-      incharge: "John Doe",
-      description: "Description for Item 1",
-    },
+  //   {
+  //     itemName: "Item 1",
+  //     categoryName: "Category A",
+  //     location: "Location 1",
+  //     incharge: "John Doe",
+  //     description: "Description for Item 1",
+  //   },
+  //   {
+  //     itemName: "Item 1",
+  //     categoryName: "Category A",
+  //     location: "Location 1",
+  //     incharge: "John Doe",
+  //     description: "Description for Item 1",
+  //   },
 
-    // Add more data objects as needed
-  ];
+  //   // Add more data objects as needed
+  // ];
   return (
     <div className="flex flex-col gap-4">
       <div className="bg-white rounded-lg py-6 px-4  ">
