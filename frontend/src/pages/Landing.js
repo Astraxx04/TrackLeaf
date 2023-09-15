@@ -55,7 +55,7 @@ const Landing = () => {
   };
 
   return (
-    <div>
+    <div className="bg-background">
       {/* Mobile sidebar navigation */}
       <div style={Object.assign({}, sidebarStyle, isSidebarOpen && { left: "0" })}>
         <button
