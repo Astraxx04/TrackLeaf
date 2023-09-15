@@ -23,27 +23,27 @@ const Sidebar = () => {
       }`}
     >
       <div className="flex flex-col gap-4">
-        {/* <div className="flex"> */}
-        {/* {isCollapsed ? (
+        <div className="flex justify-between">
+          {isCollapsed ? (
             <img className="" src={Icon} alt="" />
           ) : (
-            <img className="" src={Logo} alt="" />
-          )} */}
-        <button
-          className="text-white hover:text-gray-400 transition duration-300"
-          onClick={toggleSidebar}
-        >
-          {isCollapsed ? (
-            <>
-              <AiOutlineRight />
-            </>
-          ) : (
-            <>
-              <AiOutlineLeft />
-            </>
+            <img className="w-32" src={Logo} alt="" />
           )}
-        </button>
-        {/* </div> */}
+          <button
+            className="text-white hover:text-gray-400 transition duration-300"
+            onClick={toggleSidebar}
+          >
+            {isCollapsed ? (
+              <>
+                <AiOutlineRight />
+              </>
+            ) : (
+              <>
+                <AiOutlineLeft />
+              </>
+            )}
+          </button>
+        </div>
 
         <Link to="/dashboard/home" className="flex items-center gap-2 text-lg">
           <RxDashboard />
