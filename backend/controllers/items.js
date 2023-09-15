@@ -2,8 +2,16 @@ const Items = require("../models/items");
 const { BadRequestError, NotFoundError } = require("../errors");
 
 const getAllItems = async(req, res) => {
-    const items = await Items.find({});
-    res.status(200).json({ items });
+    const { category } = req.query;
+
+    let items;
+    if(category) {
+        items = await Items.find({ category: category });
+    } else{
+        items = await Items.find({});
+    }
+
+    res.status(200).json( {items} );
 };
 
 const getItem = async(req, res) => {
