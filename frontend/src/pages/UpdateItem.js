@@ -15,15 +15,18 @@ const UpdateItem = ({ itemId }) => {
 
   useEffect(() => {
     // Fetch the item data using itemId (assuming you have an API endpoint for this)
-    axios
-      .get(`http://localhost:5000/api/v1/${itemId}`)
-      .then((res) => {
-        const itemData = res.data; // Assuming the API response contains item data
-        setItem(itemData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (qrData) {
+      axios
+        .get(`http://localhost:5000/api/v1/${qrData}`)
+        .then((res) => {
+          const itemData = res.data; // Assuming the API response contains item data
+          setItem(itemData);
+          console.log(res.data.item);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [qrData]);
 
   const handleResult = (result) => {
@@ -45,7 +48,7 @@ const UpdateItem = ({ itemId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .patch(`http://localhost:5000/api/v1/update/${itemId}`, item) // Assuming you have an API endpoint for updating items
+      .patch(`http://localhost:5000/api/v1/update/${qrData}`, item) // Assuming you have an API endpoint for updating items
       .then((res) => {
         console.log(res);
       })
@@ -74,7 +77,6 @@ const UpdateItem = ({ itemId }) => {
           <input
             type="text"
             id="name"
-            placeholder="Enter name"
             name="name"
             value={item.name}
             onChange={handleChange}
@@ -86,9 +88,8 @@ const UpdateItem = ({ itemId }) => {
           <input
             type="text"
             id="description"
-            placeholder="Enter description"
             name="description"
-            value={item.description}
+            value={item.description || ""}
             onChange={handleChange}
           />
         </label>
@@ -98,7 +99,6 @@ const UpdateItem = ({ itemId }) => {
           <input
             type="text"
             id="category"
-            placeholder="Enter category"
             name="category"
             value={item.category}
             onChange={handleChange}
@@ -110,7 +110,6 @@ const UpdateItem = ({ itemId }) => {
           <input
             type="text"
             id="location"
-            placeholder="Enter location"
             name="location"
             value={item.location}
             onChange={handleChange}
@@ -122,7 +121,6 @@ const UpdateItem = ({ itemId }) => {
           <input
             type="text"
             id="userId"
-            placeholder="Enter incharge"
             name="userId"
             value={item.userId}
             onChange={handleChange}
