@@ -30,7 +30,6 @@ const UpdateItem = ({ itemId }) => {
 
   const handleResult = (result) => {
     if (result) {
-      console.log(result.text);
       setQrData(result.text);
       setItem({ ...item, qrId: result.text });
     }
@@ -38,10 +37,6 @@ const UpdateItem = ({ itemId }) => {
 
   const handleChange = (e) => {
     setItem({ ...item, [e.target.name]: e.target.value });
-  };
-
-  const handleError = (error) => {
-    console.error(error);
   };
 
   const handleSubmit = (e) => {
@@ -54,79 +49,104 @@ const UpdateItem = ({ itemId }) => {
       .catch((err) => {
         console.log(err);
       });
-
-    console.log(item);
   };
 
   return (
-    <div>
-      <div>
-        <p>Edit Item</p>
-      </div>
+    <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg bg-primary">
+      <h2 className="text-3xl font-bold text-center">Edit Item</h2>
+
       <QrReader
         delay={300}
-        onError={handleError}
+        onError={(error) => console.error(error)}
         onResult={handleResult}
         style={{ width: "100%" }}
       />
-      <p>{qrData ? qrData : "Scan properly"}</p>
-      <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-        <label htmlFor="name">
-          Name:
+
+      <p className="text-center mt-4 text-2xl color-primary">{qrData ? qrData : "Scan properly"}</p>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex items-center">
+          <label htmlFor="name" className="block text-sm font-medium w-1/4">
+            Name:{" "}
+          </label>
           <input
             type="text"
             id="name"
             name="name"
             value={item.name}
             onChange={handleChange}
+            className="mt-1 p-2 border rounded-lg flex-grow"
           />
-        </label>
+        </div>
 
-        <label htmlFor="description">
-          Description:
+        <div className="flex items-center">
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium w-1/4"
+          >
+            Description:{" "}
+          </label>
           <input
             type="text"
             id="description"
             name="description"
             value={item.description}
             onChange={handleChange}
+            className="mt-1 p-2 border rounded-lg flex-grow"
           />
-        </label>
+        </div>
 
-        <label htmlFor="category">
-          Category:
+        <div className="flex items-center">
+          <label htmlFor="category" className="block text-sm font-medium w-1/4">
+            Category:{" "}
+          </label>
           <input
             type="text"
             id="category"
             name="category"
             value={item.category}
             onChange={handleChange}
+            className="mt-1 p-2 border rounded-lg flex-grow"
           />
-        </label>
+        </div>
 
-        <label htmlFor="location">
-          Location:
+        <div className="flex items-center">
+          <label
+            htmlFor="location"
+            className="block text-sm font-medium w-1/4"
+          >
+            Location:{" "}
+          </label>
           <input
             type="text"
             id="location"
             name="location"
             value={item.location}
             onChange={handleChange}
+            className="mt-1 p-2 border rounded-lg flex-grow"
           />
-        </label>
+        </div>
 
-        <label htmlFor="incharge">
-          Incharge:
+        <div className="flex items-center">
+          <label htmlFor="userId" className="block text-sm font-medium w-1/4">
+            Incharge:{" "}
+          </label>
           <input
             type="text"
             id="userId"
             name="userId"
             value={item.userId}
             onChange={handleChange}
+            className="mt-1 p-2 border rounded-lg flex-grow"
           />
-        </label>
+        </div>
 
-        <button type="submit">Update</button>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out w-full"
+        >
+          Update
+        </button>
       </form>
     </div>
   );
