@@ -21,10 +21,10 @@ const Table = ({ data }) => {
               className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
             >
               <td className="px-4 py-2 text-sm">{index + 1}</td>
-              <td className="px-4 py-2 text-sm">{item.itemName}</td>
-              <td className="px-4 py-2 text-sm">{item.categoryName}</td>
+              <td className="px-4 py-2 text-sm">{item.name}</td>
+              <td className="px-4 py-2 text-sm">{item.category}</td>
               <td className="px-4 py-2 text-sm">{item.location}</td>
-              <td className="px-4 py-2 text-sm">{item.incharge}</td>
+              <td className="px-4 py-2 text-sm">{item.userId}</td>
               <td className="px-4 py-2 text-sm">{item.description}</td>
             </tr>
           ))}

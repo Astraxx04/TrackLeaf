@@ -10,6 +10,7 @@ import {
   Login,
   AddItem,
   UpdateItem,
+  DeleteItem,
 } from "./pages";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Routes>
             <Route path="/item/add" element={<AddItem />} />
             <Route path="/item/update" element={<UpdateItem />} />
+            <Route path="/item/delete" element={<DeleteItem />} />
           </Routes>
         </Router>
       </div>

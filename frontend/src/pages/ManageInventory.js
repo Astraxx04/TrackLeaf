@@ -10,7 +10,7 @@ const ManageInventory = () => {
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/v1/")
-      .then((res) => console.log(res.data.items));
+      .then((res) => setData(res.data.items));
   }, []);
   // const data = [
   //   {
@@ -71,7 +71,10 @@ const ManageInventory = () => {
           >
             Update Item
           </button>{" "}
-          <button className="px-24 py-8 bg-red-100 rounded-md font-semibold">
+          <button
+            onClick={() => navigate("/item/delete")}
+            className="px-24 py-8 bg-red-100 rounded-md font-semibold"
+          >
             Delete Item
           </button>
         </div>

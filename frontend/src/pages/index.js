@@ -7,3 +7,4 @@ export { default as ManageInventory } from "./ManageInventory";
 export { default as Login } from "./Login";
 export { default as AddItem } from "./AddItem";
 export { default as UpdateItem } from "./UpdateItem";
+export { default as DeleteItem } from "./DeleteItem";
