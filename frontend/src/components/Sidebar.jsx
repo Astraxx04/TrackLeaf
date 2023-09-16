@@ -8,14 +8,29 @@ import { MdOutlineLogout } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import Icon from "../assets/icon.png";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Sidebar = () => {
   const [isCollapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setCollapsed(!isCollapsed);
   };
+  const token = localStorage.getItem("token");
+  // Replace 'your_token_key' with the actual key you used to store the token.
+  console.log(token);
+  // Create a headers object with the token
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
+  const handleLogOut = () => {
+    axios.post("http://localhost:5000/api/v1/logout", { headers }).then(() => {
+      // toast("log out sucessfull");
+      navigate("/");
+    });
+  };
   return (
     <div
       className={`p-6  h-screen bg-primary text-white transition-all flex flex-col justify-between ${
@@ -90,12 +105,15 @@ const Sidebar = () => {
             Ayushi Sah
           </span>
         </p>
-        <p className="flex items-center gap-2 text-lg">
+        <button
+          onClick={handleLogOut}
+          className="flex items-center gap-2 text-lg"
+        >
           <MdOutlineLogout />
           <span className={`text-sm ${isCollapsed ? "hidden" : ""}`}>
             Log Out
           </span>
-        </p>
+        </button>
       </div>
     </div>
   );

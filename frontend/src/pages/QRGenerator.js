@@ -44,12 +44,23 @@ const QRGenerator = ({ hexImages }) => {
     doc.save("QR.pdf");
   };
 
+  const token = localStorage.getItem("token");
+  // Replace 'your_token_key' with the actual key you used to store the token.
+  console.log(token);
+  // Create a headers object with the token
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
   const handleGenerate = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/api/v1/noofQrCodes", {
-        numberOfQrCodes: number,
-      })
+      .post(
+        "http://localhost:5000/api/v1/noofQrCodes",
+        {
+          numberOfQrCodes: number,
+        },
+        { headers }
+      )
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   };

@@ -10,5 +10,4 @@ export { default as UpdateItem } from "./UpdateItem";
 export { default as Register } from "./Register";
 export { default as DeleteItem } from "./DeleteItem";
 export { default as Tracker } from "./Tracker";
-
 export { default as IndividualCategoryItem } from "./IndividualCategoryItem";

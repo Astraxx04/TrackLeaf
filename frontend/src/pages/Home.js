@@ -6,12 +6,14 @@ import Laptop from "../assets/Laptop.svg";
 import Chair from "../assets/Chair.svg";
 import Food from "../assets/food.svg";
 import axios from "axios";
-import { PieChart, Table } from "../components";
+import { BarChart, PieChart, Table } from "../components";
 
 const Home = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [notifications, setNotifications] = useState([]);
+  // const [notifications, setNotifications] = useState([]);
   const [data, setData] = useState([]);
+  const [notification, setNotification] = useState();
+  const [messages, setMessages] = useState();
   const [tableData, setTableData] = useState([]);
   const navigate = useNavigate();
 
@@ -25,6 +27,32 @@ const Home = () => {
       setTableData(res.data.items);
       // console.log(res.data.items);
     });
+  }, []);
+
+  const token = localStorage.getItem("token");
+  // Replace 'your_token_key' with the actual key you used to store the token.
+  console.log(token);
+  // Create a headers object with the token
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:5000/api/v1/alerts", { headers })
+      .then((res) => {
+        setNotification(res.data);
+        console.log(res.data[0]);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:5000/api/v1/notifications", { headers })
+      .then((res) => {
+        setMessages(res.data);
+        console.log(res.data);
+      });
   }, []);
 
   const toggleSidebar = () => {
@@ -58,20 +86,22 @@ const Home = () => {
         </div>
         <div className="flex flex-col gap-4 p-4">
           <p className="text-2xl font-bold text-black">Notifications</p>
-          <div className="space-y-2">
-            {notifications.map((notification, index) => (
-              <div
-                key={index}
-                className="bg-white p-3 rounded-md border border-gray-300"
-              >
-                {notification}
-              </div>
-            ))}
+          <div className="space-y-2 gap-2 flex flex-col ">
+            <p className="bg-white rounded-md py-2 px-4 text-start text-sm">
+              Category food has only 3 qunatities
+            </p>
+            <p className="bg-white rounded-md py-2 px-4 text-start text-sm">
+              Category food has only 3 qunatities
+            </p>
           </div>
         </div>
       </div>
-      <div className=" gap-6 bg-white px-4 py-6 rounded-lg">
-        <PieChart />
+      <div className=" gap-20 bg-white px-4 py-6 flex justify-between items-center rounded-lg">
+        <PieChart  />
+        <p>
+          
+        </p>
+        <BarChart />
       </div>
       <div className="flex gap-4 bg-white px-4 py-6 rounded-lg">
         <div
