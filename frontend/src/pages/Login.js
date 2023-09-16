@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { setCredentials, setToken } from "../features/authSlice";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  const { username, password } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+    dispatch(setCredentials({ username: e.target.value, password }));
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    dispatch(setCredentials({ username, password: e.target.value }));
   };
 
   const handleSubmit = (e) => {
@@ -29,20 +30,23 @@ const Login = () => {
     axios
       .post("http://localhost:5000/api/v1/login", userData)
       .then((res) => {
-        if (res.data.success) {
-          navigate("/dashboard");
-        } else {
-          console.log("Wrong username or password");
-        }
+        const newToken = res.data.token;
+
+        // Store the token in local storage
+        localStorage.setItem("token", newToken);
+
+        dispatch(setToken(newToken));
+        navigate("/dashboard/home");
       })
       .catch((err) => {
         console.error(err);
+        setErrorMessage("Login failed. Please check your credentials.");
       });
   };
 
   return (
     <div className="h-screen bg-gradient-to-r from-cyan-500 to-blue-500">
-      <div className="w-full ">
+      <div className="w-full">
         <Link to="/">
           <img
             src={logo}
