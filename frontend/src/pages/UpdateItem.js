@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { QrReader } from "react-qr-reader";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UpdateItem = ({ itemId }) => {
   const [qrData, setQrData] = useState("");
@@ -18,7 +18,7 @@ const UpdateItem = ({ itemId }) => {
   useEffect(() => {
     if (qrData) {
       axios
-        .get(`http://localhost:5000/api/v1/${qrData}`)
+        .get(`http://localhost:5000/api/v1/${qrData}`, { headers })
         .then((res) => {
           const itemData = res.data; // Assuming the API response contains item data
           setItem(res.data.item);
@@ -47,7 +47,7 @@ const UpdateItem = ({ itemId }) => {
       .patch(`http://localhost:5000/api/v1/update/${qrData}`, item) // Assuming you have an API endpoint for updating items
       .then((res) => {
         console.log(res);
-        toast("Updates saved succesfully!")
+        toast("Updates saved succesfully!");
       })
       .catch((err) => {
         console.log(err);
@@ -65,7 +65,9 @@ const UpdateItem = ({ itemId }) => {
         style={{ width: "100%" }}
       />
 
-      <p className="text-center mt-4 text-2xl color-primary">{qrData ? qrData : "Scan properly"}</p>
+      <p className="text-center mt-4 text-2xl color-primary">
+        {qrData ? qrData : "Scan properly"}
+      </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex items-center">
@@ -114,10 +116,7 @@ const UpdateItem = ({ itemId }) => {
         </div>
 
         <div className="flex items-center">
-          <label
-            htmlFor="location"
-            className="block text-sm font-medium w-1/4"
-          >
+          <label htmlFor="location" className="block text-sm font-medium w-1/4">
             Location:{" "}
           </label>
           <input

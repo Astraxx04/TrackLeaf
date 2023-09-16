@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { QrReader } from "react-qr-reader";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const DeleteItem = () => {
   const [qrData, setQrData] = useState("");
-  const [item, setItem] = useState(null); 
+  const [item, setItem] = useState(null);
+  const token = localStorage.getItem("token");
+  // Replace 'your_token_key' with the actual key you used to store the token.
+  // console.log(token);
+  // Create a headers object with the token
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
   useEffect(() => {
     // Fetch the item data using qrData (assuming you have an API endpoint for this)
     if (qrData) {
       axios
-        .get(`http://localhost:5000/api/v1/${qrData}`)
+        .get(`http://localhost:5000/api/v1/${qrData}`, { headers })
         .then((res) => {
-          const itemData = res.data.item; 
+          const itemData = res.data.item;
           setItem(itemData);
         })
         .catch((err) => {
@@ -35,11 +42,11 @@ const DeleteItem = () => {
   const handleDelete = () => {
     if (item) {
       axios
-        .delete(`http://localhost:5000/api/v1/delete/${qrData}`) 
+        .delete(`http://localhost:5000/api/v1/delete/${qrData}`, { headers })
         .then((res) => {
           console.log("Item deleted successfully");
-          toast("Item deleted successfully!")
-          setItem(null); 
+          toast("Item deleted successfully!");
+          setItem(null);
         })
         .catch((err) => {
           console.log(err);

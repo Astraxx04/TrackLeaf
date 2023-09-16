@@ -11,6 +11,14 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("token");
+  // Replace 'your_token_key' with the actual key you used to store the token.
+  // console.log(token);
+  // Create a headers object with the token
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+
   const handleUsernameChange = (e) => {
     dispatch(setCredentials({ username: e.target.value, password }));
   };
@@ -28,7 +36,7 @@ const Login = () => {
     };
 
     axios
-      .post("http://localhost:5000/api/v1/login", userData)
+      .post("http://localhost:5000/api/v1/login", userData, { headers })
       .then((res) => {
         const newToken = res.data.token;
 
