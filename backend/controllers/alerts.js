@@ -1,10 +1,14 @@
 const moment = require('moment');
 const Items = require("../models/items");
 
-async function checkExpiryDates() {
+async function checkExpiryDates(req, res) {
     try {
         const today = moment();
         const items = await Items.find({});
+
+        if (!items || items.length === 0) {
+            return res.status(200).json({ alerts: [] });
+        }
 
         const alerts = [];
 
@@ -19,15 +23,13 @@ async function checkExpiryDates() {
                 });
             }
         });
-
-        return JSON.stringify(alerts);
+        res.status(200).json(alerts);
     } catch (error) {
-        console.error('Error while checking expiry dates:', error);
-        return JSON.stringify({ error: 'An error occurred while checking expiry dates.' });
+        res.status(500).json({ error: 'An error occurred while processing the request.' });
     }
 }
 
-async function checkShortage() {
+const checkShortage = async(req, res) => {
     try {
         const items = await Items.find({});
         const alerts = {};
@@ -43,14 +45,14 @@ async function checkShortage() {
 
         for (const category in categoryCounts) {
             if (categoryCounts[category] < 5) {
-                alerts[category] = `Category ${category} has less than 5 items.`;
+                alerts[category] = `Category ${category} has only ${categoryCounts[category]} items.`;
             }
         }
-        
-        return JSON.stringify(alerts);
+        console.log(alerts);
+
+        res.status(200).json(alerts);
     } catch (error) {
-        console.error('Error while checking shortages:', error);
-        return JSON.stringify({ error: 'An error occurred while checking for shortages.' });
+        res.status(500).json({ error: 'An error occurred while processing the request.' });
     }
 }
 

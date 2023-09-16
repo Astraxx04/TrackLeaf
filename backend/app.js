@@ -7,6 +7,7 @@ const itemRouter = require("./routes/items");
 const loginRouter = require("./routes/login");
 const qrRouter = require("./routes/qrCodes");
 const chartRouter = require("./routes/chart");
+const alertsRouter = require("./routes/alerts");
 const cors = require("cors");
 const cron = require('node-cron');
 const { checkExpiryDates, checkShortage } = require('./controllers/alerts');
@@ -24,6 +25,8 @@ app.use("/api/v1/", qrRouter);
 
 app.use("/api/v1/", chartRouter);
 
+app.use("/api/v1/", alertsRouter);
+
 const port = process.env.PORT || 5000;
 
 const startServer = async () => {
@@ -36,12 +39,12 @@ const startServer = async () => {
   }
 };
 
-cron.schedule('0 9 * * *', async() => {
+cron.schedule('*/10 * * * * *', async() => {
   console.log('Running expiry check cron job...');
   const alert1 = await checkExpiryDates();
   const alert2 = await checkShortage();
-  console.log(alert1);
-  console.log(alert2);
+  // console.log(alert1);
+  // console.log(alert2);
 });
 
 startServer();
