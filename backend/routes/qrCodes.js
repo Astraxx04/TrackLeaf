@@ -2,7 +2,7 @@ const { createQrCodes } = require("../controllers/qrGenerator");
 const authMiddleware = require("../middlewares/auth");
 const checkRoleMiddleware = require("../middlewares/checkRole");
 
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
 
