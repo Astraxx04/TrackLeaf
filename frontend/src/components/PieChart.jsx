@@ -23,7 +23,6 @@ const PieChart = () => {
       .then((res) => {
         // Assuming res.data.result is an array of objects with label and value properties
         setData(res.data.result);
-        console.log(res.data.result);
       })
       .catch((err) => console.log(err));
   }, []);

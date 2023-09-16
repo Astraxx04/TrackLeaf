@@ -22,7 +22,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/v1/").then((res) => {
+    axios.get("http://localhost:5000/api/v1/", { headers }).then((res) => {
       setData(res.data.items);
       setTableData(res.data.items);
       // console.log(res.data.items);
@@ -31,7 +31,7 @@ const Home = () => {
 
   const token = localStorage.getItem("token");
   // Replace 'your_token_key' with the actual key you used to store the token.
-  console.log(token);
+  // console.log(token);
   // Create a headers object with the token
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -42,7 +42,7 @@ const Home = () => {
       .post("http://localhost:5000/api/v1/alerts", { headers })
       .then((res) => {
         setNotification(res.data);
-        console.log(res.data[0]);
+        // console.log(res.data[0]);
       });
   }, []);
 
@@ -87,20 +87,27 @@ const Home = () => {
         <div className="flex flex-col gap-4 p-4">
           <p className="text-2xl font-bold text-black">Notifications</p>
           <div className="space-y-2 gap-2 flex flex-col ">
-            <p className="bg-white rounded-md py-2 px-4 text-start text-sm">
+            {/* <p className="bg-white rounded-md py-2 px-4 text-start text-sm">
               Category food has only 3 qunatities
             </p>
             <p className="bg-white rounded-md py-2 px-4 text-start text-sm">
               Category food has only 3 qunatities
+            </p> */}
+            {/* <p className="bg-white rounded-md py-2 px-4 text-start text-sm">
+              Item Name:
             </p>
+            <p className="bg-white rounded-md py-2 px-4 text-start text-sm">
+              Days Until Expiry:
+            </p> */}
+            {/* {messages.map((x) => (
+              <p>{x.value}</p>
+            ))} */}
           </div>
         </div>
       </div>
       <div className=" gap-20 bg-white px-4 py-6 flex justify-between items-center rounded-lg">
-        <PieChart  />
-        <p>
-          
-        </p>
+        <PieChart />
+        <p></p>
         <BarChart />
       </div>
       <div className="flex gap-4 bg-white px-4 py-6 rounded-lg">
