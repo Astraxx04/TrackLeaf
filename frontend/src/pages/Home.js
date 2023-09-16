@@ -1,13 +1,29 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import Table from "../assets/table.svg";
+import furniture from "../assets/table.svg";
 import Laptop from "../assets/Laptop.svg";
 import Chair from "../assets/Chair.svg";
+import axios from "axios";
+import { Table } from "../components";
+import navigate from "react-router-dom";
 
 const Home = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const [data, setData] = useState([]);
+  const [tableData, setTableData] = useState([]);
+  const navigate = useNavigate();
+
+  const count = (y) => {
+    return data.filter((x) => x.category === y).length;
+  };
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/v1/").then((res) => {
+      setData(res.data.items);
+      console.log(res.data.items);
+    });
+  }, []);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -63,53 +79,69 @@ const Home = () => {
         <div className="flex justify-between bg-cyan-50 w-80 rounded-lg px-4 items-center">
           <div className="flex flex-col justify-evenly items-start self-stretch">
             <div>
-              <p className="font-bold text-lg text-start text-black">Table</p>
-              <p className="text-black">Count : 45</p>
+              <p className="font-bold text-lg text-start text-black">
+                Furniture
+              </p>
+              <p className="text-black">Count : {count}</p>
             </div>
-            <Link
+            <button
               className="px-6 text-sm py-1 border border-green-400 rounded-md text-black"
-              onClick={() => addNotification("Table section clicked!")}
+              onClick={() => {
+                setTableData(data.filter((x) => x.category === "furniture"));
+                count("furniture");
+              }}
             >
               View
-            </Link>
+            </button>
           </div>
-          <img className="w-32 h-32" src={Table} alt="table" />
+          <img className="w-32 h-32" src={furniture} alt="table" />
         </div>
-        
+
         {/* Laptop section */}
         <div className="flex justify-between bg-cyan-50 w-80 rounded-lg px-4 items-center">
           <div className="flex flex-col justify-evenly items-start self-stretch">
             <div>
-              <p className="font-bold text-lg text-start text-black">Laptop</p>
+              <p className="font-bold text-lg text-start text-black">
+                Hardware
+              </p>
               <p className="text-black">Count : 45</p>
             </div>
-            <Link
+            <button
               className="px-6 text-sm py-1 border border-green-400 rounded-md text-black"
-              onClick={() => addNotification("Laptop section clicked!")}
+              onClick={() =>
+                setTableData(data.filter((x) => x.category === "hardware"))
+              }
             >
               View
-            </Link>
+            </button>
           </div>
-          <img className="w-32 h-32" src={Laptop} alt="Laptop" />
+          <img className="w-32 h-32" src={Laptop} alt="Food" />
         </div>
 
         {/* Chair section */}
         <div className="flex justify-between bg-cyan-50 w-80 rounded-lg px-4 items-center">
           <div className="flex flex-col justify-evenly items-start self-stretch">
             <div>
-              <p className="font-bold text-lg text-start text-black">Chair</p>
+              <p className="font-bold text-lg text-start text-black">Food</p>
               <p className="text-black">Count : 30</p>
             </div>
-            <Link
+            <button
               className="px-6 text-sm py-1 border border-green-400 rounded-md text-black"
-              onClick={() => addNotification("Chair section clicked!")}
+              onClick={() =>
+                setTableData(data.filter((x) => x.category === "food"))
+              }
             >
               View
-            </Link>
+            </button>
           </div>
           <img className="w-32 h-32" src={Chair} alt="Chair" />
         </div>
+        <div
+          className="overflow-y-auto"
+          style={{ maxHeight: "calc(100vh - 400px)" }}
+        ></div>
       </div>
+      <Table data={tableData} />
     </div>
   );
 };
