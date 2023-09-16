@@ -29,7 +29,7 @@ const Landing = () => {
     marginLeft: "auto",
     marginRight: "auto",
     width: "30%",
-    maxHeight: "70vh",
+    maxHeight: "100vh",
   };
 
   // Inline CSS styles
@@ -55,7 +55,7 @@ const Landing = () => {
   };
 
   return (
-    <div className="bg-background">
+    <div className="bg-background h-screen">
       {/* Mobile sidebar navigation */}
       <div style={Object.assign({}, sidebarStyle, isSidebarOpen && { left: "0" })}>
         <button
