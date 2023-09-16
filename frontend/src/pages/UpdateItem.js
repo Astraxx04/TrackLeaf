@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { QrReader } from "react-qr-reader";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UpdateItem = ({ itemId }) => {
   const [qrData, setQrData] = useState("");
@@ -45,6 +47,7 @@ const UpdateItem = ({ itemId }) => {
       .patch(`http://localhost:5000/api/v1/update/${qrData}`, item) // Assuming you have an API endpoint for updating items
       .then((res) => {
         console.log(res);
+        toast("Updates saved succesfully!")
       })
       .catch((err) => {
         console.log(err);

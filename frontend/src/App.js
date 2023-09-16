@@ -22,7 +22,6 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Landing />} />
-            {/* <Route path="/chart" element={<Chart />} /> */}
             <Route path="/dashboard/Login" element={<Login />} />
             <Route path="/dashboard/Register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />}>
