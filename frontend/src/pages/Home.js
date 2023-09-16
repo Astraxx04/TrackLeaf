@@ -22,6 +22,7 @@ const Home = () => {
   useEffect(() => {
     axios.get("http://localhost:5000/api/v1/").then((res) => {
       setData(res.data.items);
+      setTableData(res.data.items);
       // console.log(res.data.items);
     });
   }, []);
@@ -80,8 +81,8 @@ const Home = () => {
           {/* Table section */}
           {/* Replace PieChart with your PieChart component */}
 
-          <div className="flex justify-between bg-cyan-50 w-80 rounded-lg px-4 items-center">
-            <div className="flex flex-col justify-evenly items-start self-stretch">
+          <div className="flex justify-between mb-4 bg-cyan-50 w-80 rounded-lg px-4 items-center">
+            <div className=" flex flex-col justify-evenly items-start self-stretch">
               <div>
                 <p className="font-bold text-lg text-start text-black">
                   Furniture
@@ -102,7 +103,7 @@ const Home = () => {
           </div>
 
           {/* Laptop section */}
-          <div className="flex justify-between bg-cyan-50 w-80 rounded-lg px-4 items-center">
+          <div className="flex justify-between mb-4 bg-cyan-50 w-80 rounded-lg px-4 items-center">
             <div className="flex flex-col justify-evenly items-start self-stretch">
               <div>
                 <p className="font-bold text-lg text-start text-black">
@@ -124,7 +125,7 @@ const Home = () => {
           </div>
 
           {/* Chair section */}
-          <div className="flex justify-between bg-cyan-50 w-80 rounded-lg px-4 items-center">
+          <div className="flex justify-between mb-4 bg-cyan-50 w-80 rounded-lg px-4 items-center">
             <div className="flex flex-col justify-evenly bg-green-50 items-start self-stretch">
               <div>
                 <p className="font-bold text-lg text-start text-black">Food</p>

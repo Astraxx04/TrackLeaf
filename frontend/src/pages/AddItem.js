@@ -4,8 +4,8 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddItem = () => {
   const [qrData, setQrData] = useState("");
@@ -53,17 +53,18 @@ const AddItem = () => {
       .post("http://localhost:5000/api/v1/insert", item)
       .then((res) => {
         console.log(res);
-        toast("Item added successfully!")
+        toast("Item added successfully!");
       })
       .catch((err) => {
         console.log(err);
+        toast("LOL its not happening!!!");
       });
   };
 
   return (
     <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg">
       <h2 className="text-3xl font-bold text-center">Add Item</h2>
-
+      <ToastContainer />
       <QrReader
         delay={300}
         onError={handleError}
