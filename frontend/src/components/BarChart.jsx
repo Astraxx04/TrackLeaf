@@ -16,7 +16,7 @@ const BarChart = () => {
   useEffect(() => {
     const margin = { top: 20, right: 30, bottom: 50, left: 40 };
     const width = 400 - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
+    const height = 250 - margin.top - margin.bottom;
 
     // Create SVG container
     const svg = d3
