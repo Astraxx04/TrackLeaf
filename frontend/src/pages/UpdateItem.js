@@ -14,6 +14,13 @@ const UpdateItem = ({ itemId }) => {
     qrId: "",
     userId: "",
   });
+  const token = localStorage.getItem("token");
+  // Replace 'your_token_key' with the actual key you used to store the token.
+  // console.log(token);
+  // Create a headers object with the token
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
 
   useEffect(() => {
     if (qrData) {
