@@ -86,8 +86,17 @@ const Home = () => {
         </div>
         <div className="flex flex-col gap-4 p-4">
           <p className="text-2xl font-bold text-black">Notifications</p>
-          <div className="space-y-2 gap-2 flex flex-col ">
-          {/* {messages[0]} */}
+          <div className="space-y-2 gap-2 flex flex-col">
+          {messages && messages.map((message, index) => (
+            <div key={index} className="bg-gray-200 p-2 rounded-md text-sm">
+              {message}
+            </div>
+          ))}
+          {notification && notification.map((message, index) => (
+            <div key={index} className="bg-gray-200 p-2 rounded-md text-sm">
+              {message}
+            </div>
+          ))}
           </div>
         </div>
       </div>
