@@ -4,7 +4,7 @@ import axios from "axios";
 
 const Tracker = () => {
   const [qrData, setQrData] = useState("");
-  const [qrDataArray, setQrDataArray] = useState([]); // Use state to store QR code data
+  const [qrDataArray, setQrDataArray] = useState([]);
   const [item, setItem] = useState({
     name: "",
     description: "",
@@ -12,6 +12,7 @@ const Tracker = () => {
     location: "",
     qrId: "",
     userId: "",
+    expiry: "",
   });
   const [userId, setUserId] = useState("");
 
@@ -40,7 +41,7 @@ const Tracker = () => {
     if (result) {
       console.log(result.text);
       setQrData(result.text);
-      setQrDataArray((prevArray) => [...prevArray, result.text]); // Update the state array
+      setItem({ ...item, qrId: result.text });
     }
   };
 
@@ -48,8 +49,7 @@ const Tracker = () => {
     e.preventDefault();
     console.log(qrDataArray);
 
-    // Use Promise.all to wait for all API requests to complete
-    const updatePromises = qrDataArray.map((qrCode, index) => {
+    const updatePromises = qrDataArray.map((qrCode) => {
       const newStatus = qrCode.status === "given" ? "received" : "given";
       return axios.patch(
         `http://localhost:5000/api/v1/update/${qrCode}`,
@@ -73,7 +73,6 @@ const Tracker = () => {
           expiry: "",
         });
         console.log(responses);
-        // Clear the QR code data after processing
         setQrData("");
         setQrDataArray([]);
       })
@@ -87,23 +86,35 @@ const Tracker = () => {
   };
 
   return (
-    <div>
-      <div>
-        <p>Edit Item</p>
+    <div className="flex flex-col h-screen items-center justify-center bg-bgbackground">
+      <div className="w-full max-w-md p-4 border border-gray-300 rounded-md bg-white">
+        <h2 className="text-3xl font-bold text-center text-black">Edit Item</h2>
+
+        <input
+          type="text"
+          onChange={(e) => setUserId(e.target.value)}
+          placeholder="Incharge"
+          className="mt-4 p-2 border rounded-lg w-full"
+        />
+
+        <QrReader
+          delay={300}
+          onError={handleError}
+          onResult={handleResult}
+          style={{ width: "100%" }}
+        />
+
+        <p className="text-center mt-4 text-2xl text-black text">
+          {qrData ? qrData : "Scan properly"}
+        </p>
+
+        <button
+          onClick={handleSubmit}
+          className="bg-primary text-white px-4 py-3 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out w-full mt-4"
+        >
+          Scan
+        </button>
       </div>
-      <input
-        type="text"
-        onChange={(e) => setUserId(e.target.value)}
-        placeholder="incharge"
-      />
-      <QrReader
-        delay={300}
-        onError={handleError}
-        onResult={handleResult}
-        style={{ width: "100%" }}
-      />
-      <p>{qrData ? qrData : "Scan properly"}</p>
-      <button onClick={handleSubmit}>Scan</button>
     </div>
   );
 };
