@@ -6,14 +6,14 @@ import axios from "axios";
 const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [userType, setuserType] = useState('');
+    const [userType, setUserType] = useState(''); // Initialize userType state
     const [name, setName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
     const navigate = useNavigate(); 
 
     const handleNameChange = (e) => {
-        setPassword(e.target.value);
+        setName(e.target.value);
     };
 
     const handleUsernameChange = (e) => {
@@ -24,10 +24,9 @@ const Register = () => {
         setPassword(e.target.value);
     };
 
-    const handleuserTypeChange = (e) => {
-        setPassword(e.target.value);
+    const handleUserTypeChange = (e) => { // Corrected the function name to handleUserTypeChange
+        setUserType(e.target.value); // Set the userType state
     };
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,6 +34,7 @@ const Register = () => {
         const userData = {
             username: username,
             password: password,
+            userType: userType, // Include userType in the userData object
         };
 
         axios
@@ -76,11 +76,16 @@ const Register = () => {
                         </div>
                         <div className="mb-4">
                             <label className='text-gray-600 font-semibold ml-2'>User Type:</label>
-                            <input type="text" id="userType" name="userType" value={userType} onChange={handleuserTypeChange} className="w-full px-4 py-2 border text-lg mt-1 hover:border-primary rounded-md focus:outline-none focus:border-primary" placeholder="Enter your user type" required />
+                            <select id="userType" name="userType" value={userType} onChange={handleUserTypeChange} className="w-full px-4 py-2 border text-lg mt-1 hover:border-primary rounded-md focus:outline-none focus:border-primary" required>
+                                <option value="">Select User Type</option>
+                                <option value="staff">Staff</option>
+                                <option value="admin">Admin</option>
+                                <option value="teacher">Teacher</option>
+                            </select>
                         </div>
                         <div className="text-center">
                             <button type="submit" className="w-full bg-primary text-white rounded-md px-4 py-2 mt-6 text-lg md:text-xl hover:bg-opacity-80">
-                                Resister
+                                Register
                             </button>
                             {errorMessage && (
                                 <p className="text-red-500 mt-2">{errorMessage}</p>
