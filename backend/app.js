@@ -39,12 +39,12 @@ const startServer = async () => {
   }
 };
 
-cron.schedule('*/10 * * * * *', async() => {
-  console.log('Running expiry check cron job...');
-  const alert1 = await checkExpiryDates();
-  const alert2 = await checkShortage();
-  // console.log(alert1);
-  // console.log(alert2);
-});
+// cron.schedule('*/10 * * * * *', async() => {
+//   console.log('Running expiry check cron job...');
+//   const alert1 = await checkExpiryDates();
+//   const alert2 = await checkShortage();
+//   // console.log(alert1);
+//   // console.log(alert2);
+// });
 
 startServer();
