@@ -18,7 +18,7 @@ const UpdateItem = ({ itemId }) => {
   useEffect(() => {
     if (qrData) {
       axios
-        .get(`http://localhost:5000/api/v1/${qrData}`)
+        .get(`https://trackleafbackend.onrender.com/api/v1/${qrData}`)
         .then((res) => {
           const itemData = res.data; // Assuming the API response contains item data
           setItem(res.data.item);
@@ -44,7 +44,7 @@ const UpdateItem = ({ itemId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .patch(`http://localhost:5000/api/v1/update/${qrData}`, item) // Assuming you have an API endpoint for updating items
+      .patch(`https://trackleafbackend.onrender.com/api/v1/update/${qrData}`, item) // Assuming you have an API endpoint for updating items
       .then((res) => {
         console.log(res);
         toast("Updates saved succesfully!")

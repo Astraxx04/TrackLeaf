@@ -57,7 +57,7 @@ const AddItem = () => {
 
     console.log(item);
     axios
-      .post("http://localhost:5000/api/v1/insert", item, { headers })
+      .post("https://trackleafbackend.onrender.com/api/v1/insert", item, { headers })
       .then((res) => {
         console.log(res);
         toast("Item added successfully!");

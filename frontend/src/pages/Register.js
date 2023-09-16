@@ -38,7 +38,7 @@ const Register = () => {
     };
 
     axios
-      .post("http://localhost:5000/api/v1/register", userData)
+      .post("https://trackleafbackend.onrender.com/api/v1/register", userData)
       .then((res) => {
         // const newToken = res.data.token;
 

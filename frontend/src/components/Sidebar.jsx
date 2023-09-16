@@ -26,7 +26,7 @@ const Sidebar = () => {
   };
 
   const handleLogOut = () => {
-    axios.post("http://localhost:5000/api/v1/logout", { headers }).then(() => {
+    axios.post("https://trackleafbackend.onrender.com/api/v1/logout", { headers }).then(() => {
       // toast("log out sucessfull");
       navigate("/");
     });

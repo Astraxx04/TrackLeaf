@@ -19,7 +19,7 @@ const PieChart = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:5000/api/v1/categoryGraph/")
+      .post("https://trackleafbackend.onrender.com/api/v1/categoryGraph/")
       .then((res) => {
         // Assuming res.data.result is an array of objects with label and value properties
         setData(res.data.result);

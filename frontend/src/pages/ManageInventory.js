@@ -11,7 +11,7 @@ const ManageInventory = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/v1/")
+      .get("https://trackleafbackend.onrender.com/api/v1/")
       .then((res) => setData(res.data.items));
   }, []);
 
