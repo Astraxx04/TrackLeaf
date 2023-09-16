@@ -19,7 +19,9 @@ const DeleteItem = () => {
     // Fetch the item data using qrData (assuming you have an API endpoint for this)
     if (qrData) {
       axios
-        .get(`http://localhost:5000/api/v1/${qrData}`, { headers })
+        .get(`https://trackleafbackend.onrender.com/api/v1/${qrData}`, {
+          headers,
+        })
         .then((res) => {
           const itemData = res.data.item;
           setItem(itemData);
@@ -42,7 +44,7 @@ const DeleteItem = () => {
   const handleDelete = () => {
     if (item) {
       axios
-        .delete(`http://localhost:5000/api/v1/delete/${qrData}`, { headers })
+        .delete(`http://localhost:5000/api/v1/delete/${qrData}`)
         .then((res) => {
           console.log("Item deleted successfully");
           toast("Item deleted successfully!");

@@ -22,7 +22,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/v1/", { headers }).then((res) => {
+    axios.get("https://trackleafbackend.onrender.com/api/v1/", { headers }).then((res) => {
       setData(res.data.items);
       setTableData(res.data.items);
       // console.log(res.data.items);
@@ -39,7 +39,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:5000/api/v1/alerts", { headers })
+      .post("https://trackleafbackend.onrender.com/api/v1/alerts", { headers })
       .then((res) => {
         setNotification(res.data);
         // console.log(res.data[0]);
@@ -48,7 +48,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:5000/api/v1/notifications", { headers })
+      .post("https://trackleafbackend.onrender.com/api/v1/notifications", { headers })
       .then((res) => {
         setMessages(res.data);
         console.log(res.data);

@@ -27,7 +27,7 @@ const Tracker = () => {
   useEffect(() => {
     if (qrData) {
       axios
-        .get(`http://localhost:5000/api/v1/${qrData}`, { headers })
+        .get(`https://trackleafbackend.onrender.com/api/v1/${qrData}`, { headers })
         .then((res) => {
           setItem(res.data.item);
         })
@@ -52,7 +52,7 @@ const Tracker = () => {
     const updatePromises = qrDataArray.map((qrCode) => {
       const newStatus = qrCode.status === "given" ? "received" : "given";
       return axios.patch(
-        `http://localhost:5000/api/v1/update/${qrCode}`,
+        `https://trackleafbackend.onrender.com/api/v1/update/${qrCode}`,
         {
           userId,
           status: newStatus,
