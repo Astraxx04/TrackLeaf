@@ -6,7 +6,10 @@ const connectDB = require("./database/connect");
 const itemRouter = require("./routes/items");
 const loginRouter = require("./routes/login");
 const qrRouter = require("./routes/qrCodes");
+const chartRouter = require("./routes/chart");
 const cors = require("cors");
+const cron = require('node-cron');
+const { checkExpiryDates, checkShortage } = require('./controllers/alerts');
 
 const notFoundMiddleware = require("./middlewares/not-found");
 const errorHandlerMiddleware = require("./middlewares/error-handler");
@@ -19,8 +22,7 @@ app.use("/api/v1/", loginRouter);
 
 app.use("/api/v1/", qrRouter);
 
-// app.use(notFoundMiddleware);
-// app.use(errorHandlerMiddleware);
+app.use("/api/v1/", chartRouter);
 
 const port = process.env.PORT || 5000;
 
@@ -33,5 +35,13 @@ const startServer = async () => {
     console.log(err);
   }
 };
+
+cron.schedule('0 9 * * *', async() => {
+  console.log('Running expiry check cron job...');
+  const alert1 = await checkExpiryDates();
+  const alert2 = await checkShortage();
+  console.log(alert1);
+  console.log(alert2);
+});
 
 startServer();

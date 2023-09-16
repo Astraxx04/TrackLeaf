@@ -12,46 +12,7 @@ const ManageInventory = () => {
       .get("http://localhost:5000/api/v1/")
       .then((res) => setData(res.data.items));
   }, []);
-  // const data = [
-  //   {
-  //     itemName: "Item 1",
-  //     categoryName: "Category A",
-  //     location: "Location 1",
-  //     incharge: "John Doe",
-  //     description: "Description for Item 1",
-  //   },
-  //   {
-  //     itemName: "Item 1",
-  //     categoryName: "Category A",
-  //     location: "Location 1",
-  //     incharge: "John Doe",
-  //     description: "Description for Item 1",
-  //   },
-  //   {
-  //     itemName: "Item 1",
-  //     categoryName: "Category A",
-  //     location: "Location 1",
-  //     incharge: "John Doe",
-  //     description: "Description for Item 1",
-  //   },
 
-  //   {
-  //     itemName: "Item 1",
-  //     categoryName: "Category A",
-  //     location: "Location 1",
-  //     incharge: "John Doe",
-  //     description: "Description for Item 1",
-  //   },
-  //   {
-  //     itemName: "Item 1",
-  //     categoryName: "Category A",
-  //     location: "Location 1",
-  //     incharge: "John Doe",
-  //     description: "Description for Item 1",
-  //   },
-
-  //   // Add more data objects as needed
-  // ];
   return (
     <div className="flex flex-col gap-4">
       <div className="bg-white rounded-lg py-6 px-4  ">
@@ -80,7 +41,12 @@ const ManageInventory = () => {
         </div>
         <div className="mt-16 flex flex-col gap-4">
           <p className="text-start font-bold text-lg">Recently added Items</p>
-          <Table data={data} />
+          <div
+            className="overflow-y-auto"
+            style={{ maxHeight: "calc(100vh - 400px)" }}
+          >
+            <Table data={data} />
+          </div>
         </div>
       </div>
     </div>

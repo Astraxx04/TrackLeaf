@@ -151,7 +151,8 @@ const AddItem = () => {
           <DatePicker
             selected={selectedDate}
             onChange={handleDateChange}
-            dateFormat="dd/MM/yyyy" // You can customize the date format as needed
+            dateFormat="dd/MM/yyyy"
+            maxDate={null}
           />
         </div>
 
