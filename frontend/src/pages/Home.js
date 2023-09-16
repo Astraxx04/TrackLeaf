@@ -42,7 +42,7 @@ const Home = () => {
       .post("https://trackleafbackend.onrender.com/api/v1/alerts", { headers })
       .then((res) => {
         setNotification(res.data);
-        // console.log(res.data[0]);
+        console.log(res.data);
       });
   }, []);
 
@@ -87,21 +87,7 @@ const Home = () => {
         <div className="flex flex-col gap-4 p-4">
           <p className="text-2xl font-bold text-black">Notifications</p>
           <div className="space-y-2 gap-2 flex flex-col ">
-            {/* <p className="bg-white rounded-md py-2 px-4 text-start text-sm">
-              Category food has only 3 qunatities
-            </p>
-            <p className="bg-white rounded-md py-2 px-4 text-start text-sm">
-              Category food has only 3 qunatities
-            </p> */}
-            {/* <p className="bg-white rounded-md py-2 px-4 text-start text-sm">
-              Item Name:
-            </p>
-            <p className="bg-white rounded-md py-2 px-4 text-start text-sm">
-              Days Until Expiry:
-            </p> */}
-            {/* {messages.map((x) => (
-              <p>{x.value}</p>
-            ))} */}
+          {/* {messages[0]} */}
           </div>
         </div>
       </div>

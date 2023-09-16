@@ -17,10 +17,7 @@ async function checkExpiryDates(req, res) {
       const daysUntilExpiry = expiryDate.diff(today, "days");
 
       if (daysUntilExpiry <= 2 && daysUntilExpiry >= 0) {
-        alerts.push({
-          itemName: item.name,
-          daysUntilExpiry: daysUntilExpiry,
-        });
+        alerts.push(`${item.name} has ${daysUntilExpiry} days for expiry`);
       }
     });
     res.status(200).json(alerts);
@@ -34,7 +31,7 @@ async function checkExpiryDates(req, res) {
 const checkShortage = async (req, res) => {
   try {
     const items = await Items.find({});
-    const alerts = {};
+    const alerts = [];
 
     const categoryCounts = {};
     items.forEach((item) => {
@@ -47,12 +44,10 @@ const checkShortage = async (req, res) => {
 
     for (const category in categoryCounts) {
       if (categoryCounts[category] < 5) {
-        alerts[
-          category
-        ] = `Category ${category} has only ${categoryCounts[category]} items.`;
+        alerts.push(`Category ${category} has only ${categoryCounts[category]} items.`);
       }
     }
-    console.log(JSON.stringify(alerts));
+    console.log(alerts);
 
     res.status(200).json(alerts);
   } catch (error) {
