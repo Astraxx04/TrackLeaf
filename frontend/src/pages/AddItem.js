@@ -4,6 +4,9 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const AddItem = () => {
   const [qrData, setQrData] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
@@ -50,6 +53,7 @@ const AddItem = () => {
       .post("http://localhost:5000/api/v1/insert", item)
       .then((res) => {
         console.log(res);
+        toast("Item added successfully!")
       })
       .catch((err) => {
         console.log(err);
