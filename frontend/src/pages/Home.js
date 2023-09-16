@@ -6,7 +6,7 @@ import Laptop from "../assets/Laptop.svg";
 import Chair from "../assets/Chair.svg";
 import Food from "../assets/food.svg";
 import axios from "axios";
-import { PieChart, Table } from "../components";
+import { BarChart, PieChart, Table } from "../components";
 
 const Home = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -70,8 +70,12 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className=" gap-6 bg-white px-4 py-6 rounded-lg">
-        <PieChart />
+      <div className=" gap-20 bg-white px-4 py-6 flex justify-between items-center rounded-lg">
+        <PieChart  />
+        <p>
+          
+        </p>
+        <BarChart />
       </div>
       <div className="flex gap-4 bg-white px-4 py-6 rounded-lg">
         <div
