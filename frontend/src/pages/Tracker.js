@@ -39,9 +39,10 @@ const Tracker = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(qrDataArray);
-    const newStatus = qrCode.status === "given" ? "received" : "given";
+
     // Use Promise.all to wait for all API requests to complete
     const updatePromises = qrDataArray.map((qrCode, index) => {
+      const newStatus = qrCode.status === "given" ? "received" : "given";
       return axios.patch(`http://localhost:5000/api/v1/update/${qrCode}`, {
         userId,
         status: newStatus,

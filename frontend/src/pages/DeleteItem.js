@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { QrReader } from "react-qr-reader";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DeleteItem = () => {
   const [qrData, setQrData] = useState("");
-  const [item, setItem] = useState(null); // Initialize item as null
+  const [item, setItem] = useState(null); 
 
   useEffect(() => {
     // Fetch the item data using qrData (assuming you have an API endpoint for this)
@@ -12,7 +14,7 @@ const DeleteItem = () => {
       axios
         .get(`http://localhost:5000/api/v1/${qrData}`)
         .then((res) => {
-          const itemData = res.data.item; // Assuming the API response contains item data
+          const itemData = res.data.item; 
           setItem(itemData);
         })
         .catch((err) => {
@@ -33,10 +35,11 @@ const DeleteItem = () => {
   const handleDelete = () => {
     if (item) {
       axios
-        .delete(`http://localhost:5000/api/v1/delete/${qrData}`) // Assuming you have an API endpoint for deleting items
+        .delete(`http://localhost:5000/api/v1/delete/${qrData}`) 
         .then((res) => {
           console.log("Item deleted successfully");
-          setItem(null); // Clear the item data after deletion
+          toast("Item deleted successfully!")
+          setItem(null); 
         })
         .catch((err) => {
           console.log(err);

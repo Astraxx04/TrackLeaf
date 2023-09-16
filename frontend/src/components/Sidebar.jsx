@@ -25,9 +25,11 @@ const Sidebar = () => {
       <div className="flex flex-col gap-4">
         <div className="flex justify-between">
           {isCollapsed ? (
-            <img className="" src={Icon} alt="" />
+            <img className="w-10" src={Icon} alt="logo.png" />
           ) : (
-            <img className="w-32" src={Logo} alt="" />
+            <Link to="/">
+              <img className="w-32" src={Logo} alt="logo.png" />
+            </Link>
           )}
           <button
             className="text-white hover:text-gray-400 transition duration-300"
