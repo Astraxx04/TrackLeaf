@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 
 const Chart = ({ items }) => {
   const chartRef = useRef(null);
+  const [data, setData] = useState()
 
   useEffect(() => {
     if (!items || items.length === 0) return;
@@ -15,6 +16,13 @@ const Chart = ({ items }) => {
         categoryCounts[item.category] = 1;
       }
     });
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/v1/categoryGraph').then((response) => {
+            setData(response.data)
+            console.log(response.data)
+        });
+      }, []);
 
     const chartData = {
       labels: Object.keys(categoryCounts),

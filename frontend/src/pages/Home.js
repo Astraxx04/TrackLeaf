@@ -4,6 +4,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import Table from "../assets/table.svg";
 import Laptop from "../assets/Laptop.svg";
 import Chair from "../assets/Chair.svg";
+import Chart from "./pages"
 
 const Home = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -60,6 +61,7 @@ const Home = () => {
       </div>
       <div className="flex flex-wrap gap-6 bg-cyan-50 px-4 py-6 rounded-lg">
         {/* Table section */}
+        <Chart />
         <div className="flex justify-between bg-cyan-50 w-80 rounded-lg px-4 items-center">
           <div className="flex flex-col justify-evenly items-start self-stretch">
             <div>
