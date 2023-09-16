@@ -50,6 +50,7 @@ function App() {
             </Routes>
             <Routes>
               <Route path="/tracker" element={<Tracker />} />
+              <Route path="login" element={<Login />} />
             </Routes>
           </Router>
         </div>

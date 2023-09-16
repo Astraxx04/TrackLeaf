@@ -36,6 +36,10 @@ const Login = () => {
         localStorage.setItem("token", newToken);
 
         dispatch(setToken(newToken));
+
+        // Add the token to the axios headers for future requests
+        axios.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
+
         navigate("/dashboard/home");
       })
       .catch((err) => {

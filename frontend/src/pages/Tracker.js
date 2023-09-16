@@ -15,10 +15,18 @@ const Tracker = () => {
   });
   const [userId, setUserId] = useState("");
 
+  const token = localStorage.getItem("token");
+  // Replace 'your_token_key' with the actual key you used to store the token.
+  console.log(token);
+  // Create a headers object with the token
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+
   useEffect(() => {
     if (qrData) {
       axios
-        .get(`http://localhost:5000/api/v1/${qrData}`)
+        .get(`http://localhost:5000/api/v1/${qrData}`, { headers })
         .then((res) => {
           setItem(res.data.item);
         })
@@ -43,10 +51,14 @@ const Tracker = () => {
     // Use Promise.all to wait for all API requests to complete
     const updatePromises = qrDataArray.map((qrCode, index) => {
       const newStatus = qrCode.status === "given" ? "received" : "given";
-      return axios.patch(`http://localhost:5000/api/v1/update/${qrCode}`, {
-        userId,
-        status: newStatus,
-      });
+      return axios.patch(
+        `http://localhost:5000/api/v1/update/${qrCode}`,
+        {
+          userId,
+          status: newStatus,
+        },
+        { headers }
+      );
     });
 
     Promise.all(updatePromises)

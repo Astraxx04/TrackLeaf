@@ -13,11 +13,11 @@ const {
 
 // router.route("/").get(authMiddleware, checkRoleMiddleware("admin"), getAllItems);
 
-router.route("/").get(getAllItems);
-router.route("/:id").get(getItem);
-router.route("/update/:id").patch(updateItem);
-// router.route("/insert").post(authMiddleware, checkRoleMiddleware("admin"),insertNewItem);
-router.route("/insert").post(insertNewItem);
-router.route("/delete/:id").delete(deleteItem);
+router.route("/").get(authMiddleware, getAllItems);
+router.route("/:id").get(authMiddleware, getItem);
+router.route("/update/:id").patch(authMiddleware, updateItem);
+router.route("/insert").post(authMiddleware, insertNewItem);
+router.route("/insert").post(authMiddleware, insertNewItem);
+router.route("/delete/:id").delete(authMiddleware, deleteItem);
 
 module.exports = router;
