@@ -1,2 +1,2 @@
 # TrackLeaf
-An effective inventory management system or ensuring the seamless flow of resources while optimizing costs and reducing waste.
+An effective inventory management system for ensuring the seamless flow of resources while optimizing costs and reducing waste.
