@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { QrReader } from "react-qr-reader";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const UpdateItem = ({ itemId }) => {
@@ -29,7 +29,7 @@ const UpdateItem = ({ itemId }) => {
           headers,
         })
         .then((res) => {
-          const itemData = res.data; // Assuming the API response contains item data
+          // const itemData = res.data; // Assuming the API response contains item data
           setItem(res.data.item);
         })
         .then(console.log(item))
@@ -37,6 +37,7 @@ const UpdateItem = ({ itemId }) => {
           console.log(err);
         });
     }
+    // eslint-disable-next-line
   }, [qrData]);
 
   const handleResult = (result) => {
