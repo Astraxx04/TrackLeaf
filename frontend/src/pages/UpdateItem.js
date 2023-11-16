@@ -68,7 +68,7 @@ const UpdateItem = ({ itemId }) => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg bg-primary">
+    <div className="max-w-md mx-auto p-4 shadow-md rounded-lg bg-primary">
       <h2 className="text-3xl font-bold text-center">Edit Item</h2>
 
       <QrReader
