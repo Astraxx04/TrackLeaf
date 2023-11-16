@@ -10,10 +10,9 @@ const chartRouter = require("./routes/chart");
 const alertsRouter = require("./routes/alerts");
 const cors = require("cors");
 const cron = require('node-cron');
-const { checkExpiryDates, checkShortage } = require('./controllers/alerts');
-
-const notFoundMiddleware = require("./middlewares/not-found");
-const errorHandlerMiddleware = require("./middlewares/error-handler");
+// const { checkExpiryDates, checkShortage } = require('./controllers/alerts');
+// const notFoundMiddleware = require("./middlewares/not-found");
+// const errorHandlerMiddleware = require("./middlewares/error-handler");
 
 app.use(cors());
 app.use(express.json());

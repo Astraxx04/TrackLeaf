@@ -6,9 +6,7 @@ const express = require("express");
 
 const router = express.Router();
 
-router
-  .route("/register")
-  .post(authMiddleware, checkRoleMiddleware("admin"), register);
+router.route("/register").post(authMiddleware, checkRoleMiddleware("admin"), register);
 
 router.route("/login").post(login);
 router.route("/logout").post(logout);
